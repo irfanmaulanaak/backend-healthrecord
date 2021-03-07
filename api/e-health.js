@@ -87,6 +87,18 @@ router.get("/getpenyakit_tenkes", async (req, res, next) => {
 
   }
 });
+router.post("/getrumahsakit", async (req, res, next) => {
+  try{
+    const idRS = req.body.idRS;
+    const rsData = await evoting.methods.getinfors(idRS).call({ from:accounts[0] })
+    res.json({
+      rsData: rsData
+    });
+  }catch(e){
+    const err_getinfors = new Error ("Error: " + e);
+    next(err_getinfors);
+  }
+});
 
 router.get("/getpasien_pasien", async (req, res, next) => {
   try{

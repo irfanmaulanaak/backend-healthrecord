@@ -1,7 +1,7 @@
 
 const web3 = require('./web3')
 
-const address = '0x5A6F7bF3C866497159803B4DFcE4d0983b3f48cD'
+const address = '0x53B4b0aB50b49BA3978C2Cee8153950aA77E2E09'
 const abi = [
   {
     "inputs": [],
@@ -57,13 +57,18 @@ const abi = [
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "_ethaddress",
+        "type": "address"
+      },
+      {
         "internalType": "string",
         "name": "_nama",
         "type": "string"
       },
       {
         "internalType": "uint8",
-        "name": "_umur",
+        "name": "_idRS",
         "type": "uint8"
       },
       {
@@ -72,27 +77,14 @@ const abi = [
         "type": "string"
       }
     ],
-    "name": "addTenkes",
+    "name": "addRumahSakit",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "check_pasien",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "check_tenkes",
+    "name": "check_rs",
     "outputs": [
       {
         "internalType": "bool",
@@ -117,8 +109,48 @@ const abi = [
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "getpasien_pasien",
+    "inputs": [
+      {
+        "internalType": "uint8",
+        "name": "_idRS",
+        "type": "uint8"
+      }
+    ],
+    "name": "getinfors",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      },
+      {
+        "internalType": "uint8",
+        "name": "",
+        "type": "uint8"
+      },
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_nik",
+        "type": "uint256"
+      }
+    ],
+    "name": "getpasien_rs",
     "outputs": [
       {
         "internalType": "uint256",
@@ -152,54 +184,7 @@ const abi = [
         "type": "uint256"
       }
     ],
-    "name": "getpasien_tenkes",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      },
-      {
-        "internalType": "uint8",
-        "name": "",
-        "type": "uint8"
-      },
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getpenyakit_pasien",
-    "outputs": [
-      {
-        "internalType": "string[]",
-        "name": "",
-        "type": "string[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_nik",
-        "type": "uint256"
-      }
-    ],
-    "name": "getpenyakit_tenkes",
+    "name": "getpenyakit_rs",
     "outputs": [
       {
         "internalType": "string[]",
