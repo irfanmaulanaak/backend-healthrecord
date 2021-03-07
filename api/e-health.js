@@ -12,7 +12,7 @@ web3.eth.getAccounts().then(results => {
 
 router.get("/getManager", async (req, res, next) => {
   try {
-    const managerData = await evoting.methods.getManager().call({ from: accounts[0] });
+    const managerData = await evoting.methods.getManager().call({ from: accounts[5] });
     res.json({
       managerData: managerData
     });
@@ -27,11 +27,12 @@ router.post("/addPasien", async (req, res, next) => {
     accounts = await web3.eth.getAccounts();
     // const tes = web3.eth.personal.unlockAccount(accounts[1], 'password', 3600);
     // console.log(tes)
-    const nikPasien = req.body.pasienNik;
-    const namaPasien = req.body.pasienName;
-    const umurPasien = req.body.pasienAge;
-    const alamatPasien = req.body.pasienAddress;
-    const registeringPasien = await evoting.methods.addPasien(nikPasien,namaPasien,umurPasien,alamatPasien).send({ from: accounts[0] });
+    const nikPasien = req.body.nik;
+    const namaPasien = req.body.nama;
+    const umurPasien = req.body.umur;
+    const alamatPasien = req.body.alamat;
+    const registeringPasien = await evoting.methods.addPasien(nikPasien,namaPasien,umurPasien,alamatPasien).send({ from: accounts[5] });
+    
     res.json({
       success : true,
       result : registeringPasien
@@ -39,38 +40,55 @@ router.post("/addPasien", async (req, res, next) => {
   }catch (e){
     const err_registeringPasien = new Error("Error: " + e);
     next(err_registeringPasien);
+    console.log(e);
+    console.log(accounts[5]);
+    
   }
 });
 
-router.get("/addTenkes", async (req, res, next) => {
+
+router.post("/addPenyakit", async (req, res, next) => {
   try{
     accounts = await web3.eth.getAccounts();
-    const namaTenkes = req.body.tenkesName;
-    const umurTenkes = req.body.tenkesAge;
-    const alamatTenkes = req.body.tenkesAddress;
-    const registeringTenkes = await evoting.methods.addTenkes(namaTenkes, umurTenkes, alamatTenkes).send({ from: accounts[0] });
+    const nikPasien = req.body.nik;
+    const penyakitPasien = req.body.penyakit;
+    const tambahPenyakit = await evoting.methods.addPenyakit(nikPasien,penyakitPasien).send({ from:accounts[5] });
+
     res.json({
       success : true,
-      result : registeringTenkes
+      result : tambahPenyakit
     });
+
   }catch (e){
-    const err_registeringPasien = new Error("Error: " + e);
-    next(err_registeringPasien);
+    const err_tambahPenyakit = new Error("Error: " + e);
+    next (err_tambahPenyakit);
   }
 });
-
-router.get("/addPenyakit", async (req, res, next) => {
+router.post("/addInfo", async (req, res, next) => {
   try{
+    accounts = await web3.eth.getAccounts();
+    const _nik = await req.body.nik;
+    const _guldar = await req.body.guldar;
+    const _tekanan = await req.body.tekanandarah;
+    const _bb = await req.body.berat;
+    const _tb = await req.body.tinggi;
+    const tambahInfoKes = await evoting.methods.addInfoKesehatan(_nik,_guldar,_tekanan,_bb,_tb).send({ from:accounts[5] });
 
-  }catch (e){
-
+    res.json({
+      success : true,
+      result : tambahInfoKes
+    });
+  }catch(e){
+    const err_tambahinfo = new Error("Error: " + e);
+    next (err_tambahinfo);
+    
   }
-});
+})
 
-router.get("/getpasien_tenkes", async (req, res, next) => {
+router.post("/getpasien_tenkes", async (req, res, next) => {
   try{
     const nik = req.body.pasienNik;
-    const pasienData = await evoting.methods.getpasien_tenkes(nik).call({ from: accounts[0] })
+    const pasienData = await evoting.methods.getpasien_rs(nik).call({ from: accounts[5] })
     res.json({
       pasienData: pasienData
     });
@@ -100,47 +118,4 @@ router.post("/getrumahsakit", async (req, res, next) => {
   }
 });
 
-router.get("/getpasien_pasien", async (req, res, next) => {
-  try{
-    const pasienData = await evoting.methods.getpasien_pasien().call({ from: accounts[1] })
-    res.json({
-      pasienData: pasienData
-    });
-  }catch (e){
-    const err_registeringPasien = new Error("Error: " + e);
-    next(err_registeringPasien);
-  }
-});
-
-router.get("/getpenyakit_pasien", async (req, res, next) => {
-  try{
-
-  }catch (e){
-
-  }
-});
-
-router.get("/getpasien_pasien", async (req, res, next) => {
-  try{
-
-  }catch (e){
-
-  }
-});
-
-router.get("/check_pasien", async (req, res, next) => {
-  try{
-
-  }catch (e){
-
-  }
-});
-
-router.get("/check_tenkes", async (req, res, next) => {
-  try{
-
-  }catch (e){
-
-  }
-});
 module.exports = router;
