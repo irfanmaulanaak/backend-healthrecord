@@ -1,7 +1,7 @@
 
 const web3 = require('./web3')
 
-const address = '0x24539E54Eb2Bb223303Bfbc403974135b956B075'
+const address = '0x1357A68b2C59F47727025Bb91d2C8D83e8cE2aDa'
 const abi = [
   {
     "inputs": [],
@@ -113,6 +113,19 @@ const abi = [
     "name": "addRumahSakit",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "check_manager",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
