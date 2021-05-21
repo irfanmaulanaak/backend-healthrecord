@@ -88,7 +88,7 @@ router.post("/addInfo", async (req, res, next) => {
 router.get("/getpasien_tenkes", async (req, res, next) => {
   try{
     const nik = req.body.pasienNik;
-    const pasienData = await ehealth.methods.getpasien_rs(nik).call({ from: accounts[5] })
+    const pasienData = await ehealth.methods.getpasien_rs(nik).call({ from: accounts[1] })
     res.json({
       pasienData: pasienData
     });
